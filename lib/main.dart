@@ -30,7 +30,6 @@ class _MyClassState extends State<MyClass> {
   Widget build(BuildContext context) {
     final source = "void main() {\n    print(\"Hello, world!\");\n}";
 
-    // Instantiate the CodeController
     _codeController = CodeController(
       text: source,
       language: python,
