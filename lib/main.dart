@@ -76,13 +76,19 @@ class _MyClassState extends State<MyClass> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Expanded(
-          child: CodeField(
-            controller: _codeController!,
-            textStyle: GoogleFonts.getFont(
-              'Cutive Mono',
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: CodeField(
+                controller: _codeController!,
+                textStyle: GoogleFonts.getFont(
+                  'Cutive Mono',
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
