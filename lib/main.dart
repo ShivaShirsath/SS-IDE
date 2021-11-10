@@ -10,25 +10,26 @@ import 'package:highlight/languages/python.dart';
 void main() {
   runApp(
     const MaterialApp(
-      home: MyClass(),
+      home: MyApp(),
     ),
   );
 }
 
-class MyClass extends StatefulWidget {
-  const MyClass({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyClassState createState() => _MyClassState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _MyClassState extends State<MyClass> {
+class _MyAppState extends State<MyApp> {
   CodeController? _codeController;
   Map<String, TextStyle>? theme = monokaiSublimeTheme;
+  bool wrap = false;
 
   @override
   Widget build(BuildContext context) {
-    final source = "void main() {\n    print(\"Hello, world!\");\n}";
+    const source = "void main() {\n    print(\"Hello, world!\");\n}";
 
     _codeController = CodeController(
       text: source,
@@ -38,14 +39,17 @@ class _MyClassState extends State<MyClass> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Code Editor"),
-        backgroundColor: Colors.teal,
+        title: const Text(
+          "SS IDE",
+        ),
         actions: [
           DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               dropdownColor: Colors.blueGrey,
               elevation: 20,
-              icon: Icon(Icons.color_lens_outlined),
+              icon: const Icon(
+                Icons.format_color_fill,
+              ),
               iconEnabledColor: Colors.white,
               items: <String>['Atom', 'Monokai-sublime', 'VS', 'Darcula']
                   .map((String value) {
@@ -66,7 +70,9 @@ class _MyClassState extends State<MyClass> {
                   value: value,
                   child: Text(
                     value,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 );
               }).toList(),
@@ -76,26 +82,21 @@ class _MyClassState extends State<MyClass> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: CodeField(
-                controller: _codeController!,
-                textStyle: GoogleFonts.getFont(
-                  'Cutive Mono',
-                ),
-              ),
-            ),
-          ],
+        child: CodeField(
+          wrap: wrap,
+          controller: _codeController!,
+          textStyle: GoogleFonts.getFont(
+            'Cutive Mono',
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {});
+          setState(
+            () {},
+          );
         },
-        child: Icon(
+        child: const Icon(
           Icons.play_arrow,
         ),
       ),
